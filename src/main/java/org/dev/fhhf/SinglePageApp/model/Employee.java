@@ -5,12 +5,12 @@ public class Employee {
     private Integer empId;
     private String empName;
     private Boolean empActive;
-    private Integer emp_dpId;
+    private Department emp_dpId;
 
     public Employee() {
     }
 
-    public Employee(Integer empId, String empName, Boolean empActive, Integer emp_dpId) {
+    public Employee(Integer empId, String empName, Boolean empActive, Department emp_dpId) {
         this.empId = empId;
         this.empName = empName;
         this.empActive = empActive;
@@ -41,11 +41,11 @@ public class Employee {
         this.empActive = empActive;
     }
 
-    public Integer getEmp_dpId() {
+    public Department getEmp_dpId() {
         return emp_dpId;
     }
 
-    public void setEmp_dpId(Integer emp_dpId) {
+    public void setEmp_dpId(Department emp_dpId) {
         this.emp_dpId = emp_dpId;
     }
 

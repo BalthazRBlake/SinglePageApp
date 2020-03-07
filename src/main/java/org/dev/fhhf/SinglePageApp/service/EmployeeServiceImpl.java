@@ -3,6 +3,7 @@ package org.dev.fhhf.SinglePageApp.service;
 import org.dev.fhhf.SinglePageApp.dao.EmployeeDao;
 import org.dev.fhhf.SinglePageApp.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,14 +14,23 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public int countTotalEmployees() {
-        return employeeDao.countTotalEmployees();
+        try{
+            return employeeDao.countTotalEmployees();
+        } catch (EmptyResultDataAccessException e){
+            //e.printStackTrace();
+            return 0;
+        }
     }
 
     @Override
     public Employee findEmployeeById(int empId){
-
-        Employee employee = employeeDao.findEmployeeById(empId);
-
-        return employee;
+        try {
+            Employee employee = employeeDao.findEmployeeById(empId);
+            return employee;
+        }
+        catch (EmptyResultDataAccessException e){
+            //e.printStackTrace();
+            return new Employee();
+        }
     }
 }

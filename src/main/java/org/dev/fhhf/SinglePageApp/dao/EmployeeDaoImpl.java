@@ -1,5 +1,6 @@
 package org.dev.fhhf.SinglePageApp.dao;
 
+import org.dev.fhhf.SinglePageApp.model.Department;
 import org.dev.fhhf.SinglePageApp.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -36,11 +37,17 @@ public class EmployeeDaoImpl implements EmployeeDao{
     private static final class EmployeeMapper implements RowMapper<Employee> {
         @Override
         public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
+
             Employee employee = new Employee();
+            Department department = new Department();
+
             employee.setEmpId(rs.getInt("emp_id"));
             employee.setEmpName(rs.getString("emp_name"));
             employee.setEmpActive(rs.getBoolean("emp_active"));
-            employee.setEmp_dpId(rs.getInt("emp_dpid"));
+
+            department.setDpIp(rs.getInt("emp_dpid"));
+            employee.setEmp_dpId(department);
+
             return employee;
         }
     }
