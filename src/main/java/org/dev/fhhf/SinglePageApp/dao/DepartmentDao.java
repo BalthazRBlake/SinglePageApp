@@ -4,5 +4,5 @@ import org.dev.fhhf.SinglePageApp.model.Department;
 
 public interface DepartmentDao {
 
-    Department findDepartmentById(int dpId);
+    String findDepartmentNameById(int dpId);
 }

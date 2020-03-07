@@ -13,14 +13,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentDao departmentDao;
 
     @Override
-    public Department findDepartmentById(int dpId) {
+    public String findDepartmentNameById(int dpId) {
         try{
-            Department department = departmentDao.findDepartmentById(dpId);
-            return department;
+            String dpName = departmentDao.findDepartmentNameById(dpId);
+            return dpName;
         }
         catch (EmptyResultDataAccessException e){
             //e.printStackTrace();
-            return new Department();
+            return "";
         }
     }
 }

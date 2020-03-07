@@ -16,12 +16,17 @@ public class DepartmentDaoImpl implements DepartmentDao {
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public Department findDepartmentById(int dpId) {
-        String sql = "SELECT * FROM tbl_departments WHERE dp_id = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{dpId}, new DepartmentMapper());
+    public String findDepartmentNameById(int dpId) {
+
+        String sql = "SELECT dp_name FROM tbl_departments WHERE dp_id = ?";
+
+        String dpName = jdbcTemplate.queryForObject(sql, new Object[]{dpId}, String.class);
+
+        System.out.println("dpId: " + dpId + " name: " + dpName);
+        return dpName;
     }
 
-    private static final class DepartmentMapper implements RowMapper<Department> {
+    /*private static final class DepartmentMapper implements RowMapper<Department> {
         @Override
         public Department mapRow(ResultSet rs, int rowNum) throws SQLException {
             Department department = new Department();
@@ -29,5 +34,5 @@ public class DepartmentDaoImpl implements DepartmentDao {
             department.setDpName(rs.getString("dp_name"));
             return department;
         }
-    }
+    }*/
 }

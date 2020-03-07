@@ -25,10 +25,8 @@ public class EmployeeResource {
 
     @GetMapping("/{empId}")
     public String findEmployeeById(@PathVariable("empId") int empId){
-        Employee employee = employeeService.findEmployeeById(empId);
-        Department department = departmentService.findDepartmentById( employee.getEmp_dpId().getDpIp() );
 
-        employee.setEmp_dpId(department);
+        Employee employee = employeeService.findEmployeeById(empId);
 
         return employee.toString();
     }

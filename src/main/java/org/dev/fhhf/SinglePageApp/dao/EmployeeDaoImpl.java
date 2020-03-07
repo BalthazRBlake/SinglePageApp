@@ -2,6 +2,7 @@ package org.dev.fhhf.SinglePageApp.dao;
 
 import org.dev.fhhf.SinglePageApp.model.Department;
 import org.dev.fhhf.SinglePageApp.model.Employee;
+import org.dev.fhhf.SinglePageApp.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,6 +17,8 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private DepartmentService departmentService;
 
     @Override
     public int countTotalEmployees() {
@@ -25,16 +28,26 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
     @Override
     public List<EmployeeDao> findAllEmployees() {
+        String sql = "SELECT * FROM tbl_employees";
         return null;
     }
 
     @Override
     public Employee findEmployeeById(int empId) {
+
         String sql = "SELECT * FROM tbl_employees WHERE emp_id = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{empId}, new EmployeeMapper());
+        Employee employee = jdbcTemplate.queryForObject(sql, new Object[]{empId}, new EmployeeMapper());
+
+        Department department = employee.getEmp_dpId();
+        String dpName = departmentService.findDepartmentNameById( department.getDpIp() );
+        department.setDpName(dpName);
+
+        employee.setEmp_dpId(department);
+        return employee;
     }
 
     private static final class EmployeeMapper implements RowMapper<Employee> {
+
         @Override
         public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
 
@@ -44,8 +57,8 @@ public class EmployeeDaoImpl implements EmployeeDao{
             employee.setEmpId(rs.getInt("emp_id"));
             employee.setEmpName(rs.getString("emp_name"));
             employee.setEmpActive(rs.getBoolean("emp_active"));
+            department.setDpIp( rs.getInt("emp_dpid") );
 
-            department.setDpIp(rs.getInt("emp_dpid"));
             employee.setEmp_dpId(department);
 
             return employee;
