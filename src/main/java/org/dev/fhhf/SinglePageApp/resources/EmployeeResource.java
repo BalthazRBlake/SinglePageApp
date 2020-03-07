@@ -6,6 +6,7 @@ import org.dev.fhhf.SinglePageApp.service.DepartmentService;
 import org.dev.fhhf.SinglePageApp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -17,14 +18,18 @@ public class EmployeeResource {
     private DepartmentService departmentService;
 
     @GetMapping("/")
-    public String findEmployeeById(){
-        Employee employee = employeeService.findEmployeeById(1);
+    public String countTotalEmployees() {
+        int count = employeeService.countTotalEmployees();
+        return "# Employees: " + count;
+    }
+
+    @GetMapping("/{empId}")
+    public String findEmployeeById(@PathVariable("empId") int empId){
+        Employee employee = employeeService.findEmployeeById(empId);
         Department department = departmentService.findDepartmentById( employee.getEmp_dpId().getDpIp() );
 
         employee.setEmp_dpId(department);
 
-    //public String countTotalEmployees(){
-        //System.out.println(employeeService.countTotalEmployees());
         return employee.toString();
     }
 }
