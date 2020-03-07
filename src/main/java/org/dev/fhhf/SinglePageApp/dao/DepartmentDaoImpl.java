@@ -19,10 +19,8 @@ public class DepartmentDaoImpl implements DepartmentDao {
     public String findDepartmentNameById(int dpId) {
 
         String sql = "SELECT dp_name FROM tbl_departments WHERE dp_id = ?";
-
         String dpName = jdbcTemplate.queryForObject(sql, new Object[]{dpId}, String.class);
 
-        System.out.println("dpId: " + dpId + " name: " + dpName);
         return dpName;
     }
 

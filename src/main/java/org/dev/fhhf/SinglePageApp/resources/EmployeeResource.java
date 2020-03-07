@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class EmployeeResource {
 
@@ -21,6 +23,11 @@ public class EmployeeResource {
     public String countTotalEmployees() {
         int count = employeeService.countTotalEmployees();
         return "# Employees: " + count;
+    }
+
+    @GetMapping("/all")
+    public List<Employee> findAllEmployees(){
+        return employeeService.findAllEmployees();
     }
 
     @GetMapping("/{empId}")

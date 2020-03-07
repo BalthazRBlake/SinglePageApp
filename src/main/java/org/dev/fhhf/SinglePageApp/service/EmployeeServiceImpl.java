@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
 
@@ -20,6 +22,11 @@ public class EmployeeServiceImpl implements EmployeeService{
             //e.printStackTrace();
             return 0;
         }
+    }
+
+    @Override
+    public List<Employee> findAllEmployees() {
+        return employeeDao.findAllEmployees();
     }
 
     @Override

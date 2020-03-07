@@ -27,9 +27,15 @@ public class EmployeeDaoImpl implements EmployeeDao{
     }
 
     @Override
-    public List<EmployeeDao> findAllEmployees() {
+    public List<Employee> findAllEmployees() {
         String sql = "SELECT * FROM tbl_employees";
-        return null;
+        List<Employee> employees = jdbcTemplate.query(sql, new EmployeeMapper());
+
+        for(Employee employee : employees){
+            setDepartment(employee);
+        }
+
+        return employees;
     }
 
     @Override
@@ -38,6 +44,10 @@ public class EmployeeDaoImpl implements EmployeeDao{
         String sql = "SELECT * FROM tbl_employees WHERE emp_id = ?";
         Employee employee = jdbcTemplate.queryForObject(sql, new Object[]{empId}, new EmployeeMapper());
 
+        return setDepartment(employee);
+    }
+
+    private Employee setDepartment(Employee employee){
         Department department = employee.getEmp_dpId();
         String dpName = departmentService.findDepartmentNameById( department.getDpIp() );
         department.setDpName(dpName);

@@ -8,7 +8,7 @@ public interface EmployeeDao {
 
     int countTotalEmployees();
 
-    List<EmployeeDao> findAllEmployees();
+    List<Employee> findAllEmployees();
 
     Employee findEmployeeById(int empId);
 }
