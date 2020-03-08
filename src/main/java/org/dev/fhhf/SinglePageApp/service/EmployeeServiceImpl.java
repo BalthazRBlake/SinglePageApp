@@ -30,10 +30,14 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
+    public List<Employee> findEmployeesNameStartsWith(String empName) {
+        return employeeDao.findEmployeesNameStartsWith(empName);
+    }
+
+    @Override
     public Employee findEmployeeById(int empId){
         try {
-            Employee employee = employeeDao.findEmployeeById(empId);
-            return employee;
+            return employeeDao.findEmployeeById(empId);
         }
         catch (EmptyResultDataAccessException e){
             //e.printStackTrace();

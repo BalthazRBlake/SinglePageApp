@@ -10,5 +10,7 @@ public interface EmployeeService {
 
     List<Employee> findAllEmployees();
 
+    List<Employee> findEmployeesNameStartsWith(String empName);
+
     Employee findEmployeeById(int empId);
 }

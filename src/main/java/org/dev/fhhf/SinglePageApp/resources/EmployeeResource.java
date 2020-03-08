@@ -16,13 +16,12 @@ public class EmployeeResource {
 
     @Autowired
     private EmployeeService employeeService;
-    @Autowired
-    private DepartmentService departmentService;
+    //@Autowired
+    //private DepartmentService departmentService;
 
     @GetMapping("/")
     public String countTotalEmployees() {
-        int count = employeeService.countTotalEmployees();
-        return "# Employees: " + count;
+        return "# Employees: " + employeeService.countTotalEmployees();
     }
 
     @GetMapping("/all")
@@ -30,11 +29,13 @@ public class EmployeeResource {
         return employeeService.findAllEmployees();
     }
 
-    @GetMapping("/{empId}")
-    public String findEmployeeById(@PathVariable("empId") int empId){
+    @GetMapping("/search/{empName}")
+    public List<Employee> findEmployeesNameStarsWith(@PathVariable("empName") String empName){
+        return employeeService.findEmployeesNameStartsWith(empName);
+    }
 
-        Employee employee = employeeService.findEmployeeById(empId);
-
-        return employee.toString();
+    @GetMapping("/id/{empId}")
+    public Employee findEmployeeById(@PathVariable("empId") int empId){
+        return employeeService.findEmployeeById(empId);
     }
 }

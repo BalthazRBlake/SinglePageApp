@@ -28,32 +28,31 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
     @Override
     public List<Employee> findAllEmployees() {
-        String sql = "SELECT * FROM tbl_employees";
-        List<Employee> employees = jdbcTemplate.query(sql, new EmployeeMapper());
+        String sql = "SELECT * FROM tbl_employees "
+                   + "LEFT JOIN tbl_departments "
+                   + "ON emp_dpid = dp_id";
 
-        for(Employee employee : employees){
-            setDepartment(employee);
-        }
+        return jdbcTemplate.query(sql, new EmployeeMapper());
+    }
 
-        return employees;
+    @Override
+    public List<Employee> findEmployeesNameStartsWith(String empName) {
+        String sql = "SELECT * FROM tbl_employees "
+                   + "LEFT JOIN tbl_departments "
+                   + "ON emp_dpid = dp_id "
+                   + "WHERE emp_name ILIKE '"+empName+"%'";
+
+        return jdbcTemplate.query(sql, new EmployeeMapper());
     }
 
     @Override
     public Employee findEmployeeById(int empId) {
+        String sql = "SELECT * FROM tbl_employees "
+                   + "LEFT JOIN tbl_departments "
+                   + "ON emp_dpid = dp_id "
+                   + " WHERE emp_id = ?";
 
-        String sql = "SELECT * FROM tbl_employees WHERE emp_id = ?";
-        Employee employee = jdbcTemplate.queryForObject(sql, new Object[]{empId}, new EmployeeMapper());
-
-        return setDepartment(employee);
-    }
-
-    private Employee setDepartment(Employee employee){
-        Department department = employee.getEmp_dpId();
-        String dpName = departmentService.findDepartmentNameById( department.getDpIp() );
-        department.setDpName(dpName);
-
-        employee.setEmp_dpId(department);
-        return employee;
+        return jdbcTemplate.queryForObject(sql, new Object[]{empId}, new EmployeeMapper());
     }
 
     private static final class EmployeeMapper implements RowMapper<Employee> {
@@ -67,8 +66,8 @@ public class EmployeeDaoImpl implements EmployeeDao{
             employee.setEmpId(rs.getInt("emp_id"));
             employee.setEmpName(rs.getString("emp_name"));
             employee.setEmpActive(rs.getBoolean("emp_active"));
-            department.setDpIp( rs.getInt("emp_dpid") );
-
+            department.setDpIp( rs.getInt("dp_id") );
+            department.setDpName(rs.getString("dp_name"));
             employee.setEmp_dpId(department);
 
             return employee;
