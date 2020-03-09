@@ -11,13 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@RestController("/spapp")
 public class EmployeeResource {
 
     @Autowired
     private EmployeeService employeeService;
-    //@Autowired
-    //private DepartmentService departmentService;
 
     @GetMapping("/")
     public String countTotalEmployees() {
@@ -29,9 +27,17 @@ public class EmployeeResource {
         return employeeService.findAllEmployees();
     }
 
-    @GetMapping("/search/{empName}")
-    public List<Employee> findEmployeesNameStarsWith(@PathVariable("empName") String empName){
-        return employeeService.findEmployeesNameStartsWith(empName);
+    @GetMapping("/paginated/{page}/{size}")
+    public List<Employee> findAllEmployeesPaginated(@PathVariable("page") int page,
+                                                    @PathVariable("size") int size){
+        return employeeService.findAllEmployeesPaginated(page,size);
+    }
+
+    @GetMapping("/search/{empName}/{page}/{size}")
+    public List<Employee> findEmployeesNameStarsWith(@PathVariable("empName") String empName,
+                                                     @PathVariable("page") int page,
+                                                     @PathVariable("size") int size){
+        return employeeService.findEmployeesNameStartsWith(empName, page, size);
     }
 
     @GetMapping("/id/{empId}")

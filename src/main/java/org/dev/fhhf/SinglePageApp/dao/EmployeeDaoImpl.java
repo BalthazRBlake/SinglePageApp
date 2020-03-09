@@ -36,13 +36,24 @@ public class EmployeeDaoImpl implements EmployeeDao{
     }
 
     @Override
-    public List<Employee> findEmployeesNameStartsWith(String empName) {
+    public List<Employee> findAllEmployeesPaginated(int page, int size) {
         String sql = "SELECT * FROM tbl_employees "
                    + "LEFT JOIN tbl_departments "
                    + "ON emp_dpid = dp_id "
-                   + "WHERE emp_name ILIKE '"+empName+"%'";
+                   + "OFFSET ? LIMIT ?";
+                   //+ "WHERE emp_id >= 3 ORDER BY emp_id ASC LIMIT 2";
+        return jdbcTemplate.query(sql, new Object[]{ (page-1)*size, size }, new EmployeeMapper());
+    }
 
-        return jdbcTemplate.query(sql, new EmployeeMapper());
+    @Override
+    public List<Employee> findEmployeesNameStartsWith(String empName, int page, int size) {
+        String sql = "SELECT * FROM tbl_employees "
+                   + "LEFT JOIN tbl_departments "
+                   + "ON emp_dpid = dp_id "
+                   + "WHERE emp_name ILIKE '"+empName+"%'"
+                   + "OFFSET ? LIMIT ?";
+
+        return jdbcTemplate.query(sql, new Object[]{ (page-1)*size, size }, new EmployeeMapper());
     }
 
     @Override

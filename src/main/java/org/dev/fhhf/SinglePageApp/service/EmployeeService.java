@@ -10,7 +10,9 @@ public interface EmployeeService {
 
     List<Employee> findAllEmployees();
 
-    List<Employee> findEmployeesNameStartsWith(String empName);
+    List<Employee> findAllEmployeesPaginated(int page, int size);
+
+    List<Employee> findEmployeesNameStartsWith(String empName, int page, int size);
 
     Employee findEmployeeById(int empId);
 }
