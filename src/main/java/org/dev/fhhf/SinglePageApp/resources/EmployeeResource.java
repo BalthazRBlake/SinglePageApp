@@ -1,16 +1,16 @@
 package org.dev.fhhf.SinglePageApp.resources;
 
-import org.dev.fhhf.SinglePageApp.model.Department;
 import org.dev.fhhf.SinglePageApp.model.Employee;
-import org.dev.fhhf.SinglePageApp.service.DepartmentService;
 import org.dev.fhhf.SinglePageApp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController("/spapp")
 public class EmployeeResource {
 
