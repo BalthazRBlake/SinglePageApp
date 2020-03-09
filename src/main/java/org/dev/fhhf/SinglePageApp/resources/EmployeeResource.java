@@ -17,9 +17,9 @@ public class EmployeeResource {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping("/")
+    @GetMapping("/count")
     public String countTotalEmployees() {
-        return "# Employees: " + employeeService.countTotalEmployees();
+        return String.valueOf( employeeService.countTotalEmployees() );
     }
 
     @GetMapping("/all")
