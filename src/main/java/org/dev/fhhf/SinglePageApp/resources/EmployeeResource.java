@@ -36,12 +36,13 @@ public class EmployeeResource {
         return employeeService.findAllEmployeesPaginated(this.page,this.size);
     }
 
-    @GetMapping("/search/{empName}/{page}/{size}")
-    public List<Employee> findEmployeesNameStarsWith(@PathVariable("empName") String empName,
-                                                     @PathVariable("page") int page,
-                                                     @PathVariable("size") int size){
-        this.page = page;
-        this.size = size;
+    //@GetMapping("/search/{empName}/{page}/{size}")
+    @GetMapping("/search/{empName}")
+    public List<Employee> findEmployeesNameStarsWith(@PathVariable("empName") String empName){
+                                                     //@PathVariable("page") int page,
+                                                     //@PathVariable("size") int size
+        //this.page = page;
+        //this.size = size;
         return employeeService.findEmployeesNameStartsWith(empName, this.page, this.size);
     }
 
@@ -49,4 +50,6 @@ public class EmployeeResource {
     public Employee findEmployeeById(@PathVariable("empId") int empId){
         return employeeService.findEmployeeById(empId);
     }
+
+
 }
