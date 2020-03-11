@@ -5,6 +5,7 @@ import org.dev.fhhf.SinglePageApp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,9 +16,11 @@ public class EmployeeResource {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping("/count")
-    public String countTotalEmployees() {
-        return String.valueOf( employeeService.countTotalEmployees() );
+    private int page = 1, size = 5;
+
+    @GetMapping("/pages")
+    public int countTotalEmployees(){
+        return employeeService.countTotalEmployees();
     }
 
     @GetMapping("/all")
@@ -28,14 +31,18 @@ public class EmployeeResource {
     @GetMapping("/paginated/{page}/{size}")
     public List<Employee> findAllEmployeesPaginated(@PathVariable("page") int page,
                                                     @PathVariable("size") int size){
-        return employeeService.findAllEmployeesPaginated(page,size);
+        this.page = page;
+        this.size = size;
+        return employeeService.findAllEmployeesPaginated(this.page,this.size);
     }
 
     @GetMapping("/search/{empName}/{page}/{size}")
     public List<Employee> findEmployeesNameStarsWith(@PathVariable("empName") String empName,
                                                      @PathVariable("page") int page,
                                                      @PathVariable("size") int size){
-        return employeeService.findEmployeesNameStartsWith(empName, page, size);
+        this.page = page;
+        this.size = size;
+        return employeeService.findEmployeesNameStartsWith(empName, this.page, this.size);
     }
 
     @GetMapping("/id/{empId}")
