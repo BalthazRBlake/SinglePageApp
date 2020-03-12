@@ -49,4 +49,9 @@ public class EmployeeServiceImpl implements EmployeeService{
             return new Employee();
         }
     }
+
+    @Override
+    public int insertEmployee(Employee employee) {
+            return employeeDao.insertEmployee(employee);
+    }
 }

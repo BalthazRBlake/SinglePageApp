@@ -1,24 +1,28 @@
 package org.dev.fhhf.SinglePageApp.model;
 
-public class Department {
+import java.io.Serializable;
 
-    private Integer dpIp;
+public class Department implements Serializable {
+
+    private static final long serialVersionUD = 1L;
+
+    private Integer dpId;
     private String dpName;
 
     public Department() {
     }
 
-    public Department(Integer dpIp, String dpName) {
-        this.dpIp = dpIp;
+    public Department(Integer dpId, String dpName) {
+        this.dpId = dpId;
         this.dpName = dpName;
     }
 
-    public Integer getDpIp() {
-        return dpIp;
+    public Integer getDpId() {
+        return dpId;
     }
 
-    public void setDpIp(Integer dpIp) {
-        this.dpIp = dpIp;
+    public void setDpId(Integer dpId) {
+        this.dpId = dpId;
     }
 
     public String getDpName() {
@@ -32,7 +36,7 @@ public class Department {
     @Override
     public String toString() {
         return "Department{" +
-                "dpIp=" + dpIp +
+                "dpIp=" + dpId +
                 ", dpName='" + dpName + '\'' +
                 '}';
     }

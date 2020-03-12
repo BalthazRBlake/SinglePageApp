@@ -15,4 +15,8 @@ public interface EmployeeDao {
     List<Employee> findEmployeesNameStartsWith(String empName, int page, int size);
 
     Employee findEmployeeById(int empId);
+
+    int insertEmployee(Employee employee);
+
+    Employee updateEmployee(Employee employee);
 }

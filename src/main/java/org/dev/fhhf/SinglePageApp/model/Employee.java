@@ -1,6 +1,10 @@
 package org.dev.fhhf.SinglePageApp.model;
 
-public class Employee {
+import java.io.Serializable;
+
+public class Employee implements Serializable {
+
+    private static final long serialVersionUD = 1L;
 
     private Integer empId;
     private String empName;

@@ -66,6 +66,22 @@ public class EmployeeDaoImpl implements EmployeeDao{
         return jdbcTemplate.queryForObject(sql, new Object[]{empId}, new EmployeeMapper());
     }
 
+    @Override
+    public int insertEmployee(Employee employee) {
+        String sql = "INSERT INTO tbl_employees (emp_id, emp_name, emp_active, emp_dpid) VALUES (DEFAULT, ?, ?, ?)";
+
+        return jdbcTemplate.update(sql, new Object[]{
+                employee.getEmpName(),
+                employee.getEmpActive(),
+                employee.getEmp_dpId().getDpId()});
+    }
+
+    @Override
+    public Employee updateEmployee(Employee employee) {
+
+        return null;
+    }
+
     private static final class EmployeeMapper implements RowMapper<Employee> {
 
         @Override
@@ -77,7 +93,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
             employee.setEmpId(rs.getInt("emp_id"));
             employee.setEmpName(rs.getString("emp_name"));
             employee.setEmpActive(rs.getBoolean("emp_active"));
-            department.setDpIp( rs.getInt("dp_id") );
+            department.setDpId( rs.getInt("dp_id") );
             department.setDpName(rs.getString("dp_name"));
             employee.setEmp_dpId(department);
 

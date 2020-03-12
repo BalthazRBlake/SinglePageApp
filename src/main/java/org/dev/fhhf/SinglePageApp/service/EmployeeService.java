@@ -15,4 +15,6 @@ public interface EmployeeService {
     List<Employee> findEmployeesNameStartsWith(String empName, int page, int size);
 
     Employee findEmployeeById(int empId);
+
+    int insertEmployee(Employee employee);
 }
