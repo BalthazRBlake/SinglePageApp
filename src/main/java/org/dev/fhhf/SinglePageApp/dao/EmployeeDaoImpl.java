@@ -4,7 +4,6 @@ import org.dev.fhhf.SinglePageApp.model.Department;
 import org.dev.fhhf.SinglePageApp.model.Employee;
 import org.dev.fhhf.SinglePageApp.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -19,8 +18,6 @@ import java.util.List;
 public class EmployeeDaoImpl implements EmployeeDao{
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
-    @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     @Autowired
     private DepartmentService departmentService;
@@ -28,7 +25,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
     @Override
     public int countTotalEmployees() {
         String sql = "SELECT COUNT(*) FROM tbl_employees";
-        return jdbcTemplate.queryForObject(sql, Integer.class);
+        return namedParameterJdbcTemplate.getJdbcTemplate().queryForObject(sql, Integer.class);
     }
 
     @Override
@@ -37,7 +34,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
                    + "LEFT JOIN tbl_departments "
                    + "ON emp_dpid = dp_id";
 
-        return jdbcTemplate.query(sql, new EmployeeMapper());
+        return namedParameterJdbcTemplate.query(sql, new EmployeeMapper());
     }
 
     @Override
@@ -45,9 +42,10 @@ public class EmployeeDaoImpl implements EmployeeDao{
         String sql = "SELECT * FROM tbl_employees "
                    + "LEFT JOIN tbl_departments "
                    + "ON emp_dpid = dp_id "
-                   + "OFFSET ? LIMIT ?";
-                   //+ "WHERE emp_id >= 3 ORDER BY emp_id ASC LIMIT 2";
-        return jdbcTemplate.query(sql, new Object[]{ (page-1)*size, size }, new EmployeeMapper());
+                   + "OFFSET :page LIMIT :size";
+        SqlParameterSource namedParams = new MapSqlParameterSource("page", (page-1)*size)
+                                                        .addValue("size", size);
+        return namedParameterJdbcTemplate.query(sql, namedParams, new EmployeeMapper());
     }
 
     @Override
@@ -68,19 +66,19 @@ public class EmployeeDaoImpl implements EmployeeDao{
         String sql = "SELECT * FROM tbl_employees "
                    + "LEFT JOIN tbl_departments "
                    + "ON emp_dpid = dp_id "
-                   + " WHERE emp_id = ?";
-
-        return jdbcTemplate.queryForObject(sql, new Object[]{empId}, new EmployeeMapper());
+                   + " WHERE emp_id = :empId";
+        SqlParameterSource namedParams = new MapSqlParameterSource("empId", empId);
+        return namedParameterJdbcTemplate.queryForObject(sql, namedParams, new EmployeeMapper());
     }
 
     @Override
     public int insertEmployee(Employee employee) {
-        String sql = "INSERT INTO tbl_employees (emp_id, emp_name, emp_active, emp_dpid) VALUES (DEFAULT, ?, ?, ?)";
-
-        return jdbcTemplate.update(sql, new Object[]{
-                employee.getEmpName(),
-                employee.getEmpActive(),
-                employee.getEmp_dpId().getDpId()});
+        String sql = "INSERT INTO tbl_employees (emp_id, emp_name, emp_active, emp_dpid) "
+                   + "VALUES (DEFAULT, :empName, :empActive, :emp_dpId)";
+        SqlParameterSource namedParams = new MapSqlParameterSource("empName", employee.getEmpName())
+                .addValue("empActive", employee.getEmpActive())
+                .addValue("emp_dpId",employee.getEmp_dpId().getDpId());
+        return namedParameterJdbcTemplate.update(sql, namedParams);
     }
 
     @Override
