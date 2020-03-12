@@ -70,4 +70,14 @@ public class EmployeeServiceImpl implements EmployeeService{
             return 0;
         }
     }
+
+    @Override
+    public int deleteEmployee(int empId) {
+        try{
+            return employeeDao.deleteEmployee(empId);
+        }
+        catch (DataIntegrityViolationException ex){
+            return 0;
+        }
+    }
 }

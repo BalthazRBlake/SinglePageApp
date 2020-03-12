@@ -20,4 +20,6 @@ public interface EmployeeService {
     int insertEmployee(Employee employee);
 
     int updateEmployee(Employee employee);
+
+    int deleteEmployee(int empId);
 }

@@ -95,6 +95,14 @@ public class EmployeeDaoImpl implements EmployeeDao{
         return namedParameterJdbcTemplate.update(sql, namedParams);
     }
 
+    @Override
+    public int deleteEmployee(int empId) {
+        String sql = "DELETE FROM tbl_employees "
+                   + "WHERE emp_id = :empId";
+        SqlParameterSource namedParams = new MapSqlParameterSource("empId", empId);
+        return namedParameterJdbcTemplate.update(sql, namedParams);
+    }
+
     private static final class EmployeeMapper implements RowMapper<Employee> {
 
         @Override
