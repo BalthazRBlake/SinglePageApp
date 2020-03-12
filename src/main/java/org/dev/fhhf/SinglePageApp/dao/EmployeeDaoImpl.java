@@ -32,8 +32,8 @@ public class EmployeeDaoImpl implements EmployeeDao{
     public List<Employee> findAllEmployees() {
         String sql = "SELECT * FROM tbl_employees "
                    + "LEFT JOIN tbl_departments "
-                   + "ON emp_dpid = dp_id";
-
+                   + "ON emp_dpid = dp_id "
+                   + "ORDER BY emp_id ";
         return namedParameterJdbcTemplate.query(sql, new EmployeeMapper());
     }
 
@@ -42,6 +42,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
         String sql = "SELECT * FROM tbl_employees "
                    + "LEFT JOIN tbl_departments "
                    + "ON emp_dpid = dp_id "
+                   + "ORDER BY emp_id "
                    + "OFFSET :page LIMIT :size";
         SqlParameterSource namedParams = new MapSqlParameterSource("page", (page-1)*size)
                                                         .addValue("size", size);
@@ -54,7 +55,8 @@ public class EmployeeDaoImpl implements EmployeeDao{
         String sql = "SELECT * FROM tbl_employees "
                    + "LEFT JOIN tbl_departments "
                    + "ON emp_dpid = dp_id "
-                   + "WHERE emp_name ILIKE :empName";
+                   + "WHERE emp_name ILIKE :empName "
+                   + "ORDER BY emp_id ";
                    //+ "OFFSET :page LIMIT :size";
         SqlParameterSource params = new MapSqlParameterSource("empName", empName.concat("%"));
         //.addValue("page", (page-1)*size).addValue("size", size);
@@ -76,15 +78,21 @@ public class EmployeeDaoImpl implements EmployeeDao{
         String sql = "INSERT INTO tbl_employees (emp_id, emp_name, emp_active, emp_dpid) "
                    + "VALUES (DEFAULT, :empName, :empActive, :emp_dpId)";
         SqlParameterSource namedParams = new MapSqlParameterSource("empName", employee.getEmpName())
-                .addValue("empActive", employee.getEmpActive())
-                .addValue("emp_dpId",employee.getEmp_dpId().getDpId());
+                                                .addValue("empActive", employee.getEmpActive())
+                                                .addValue("emp_dpId",employee.getEmp_dpId().getDpId());
         return namedParameterJdbcTemplate.update(sql, namedParams);
     }
 
     @Override
-    public Employee updateEmployee(Employee employee) {
-
-        return null;
+    public int updateEmployee(Employee employee) {
+        String sql = "UPDATE tbl_employees "
+                   + "SET emp_name = :empName, emp_active = :empActive, emp_dpid = :emp_dpId "
+                   + "WHERE emp_id = :empId";
+        SqlParameterSource namedParams = new MapSqlParameterSource("empId", employee.getEmpId())
+                                            .addValue("empName", employee.getEmpName())
+                                            .addValue("empActive", employee.getEmpActive())
+                                            .addValue("emp_dpId",employee.getEmp_dpId().getDpId());
+        return namedParameterJdbcTemplate.update(sql, namedParams);
     }
 
     private static final class EmployeeMapper implements RowMapper<Employee> {

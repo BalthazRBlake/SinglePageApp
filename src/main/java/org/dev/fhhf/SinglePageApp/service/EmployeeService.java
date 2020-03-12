@@ -1,5 +1,6 @@
 package org.dev.fhhf.SinglePageApp.service;
 
+import net.bytebuddy.matcher.ElementMatcher;
 import org.dev.fhhf.SinglePageApp.model.Employee;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface EmployeeService {
     Employee findEmployeeById(int empId);
 
     int insertEmployee(Employee employee);
+
+    int updateEmployee(Employee employee);
 }

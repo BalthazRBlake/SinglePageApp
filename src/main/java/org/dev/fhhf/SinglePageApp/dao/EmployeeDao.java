@@ -18,5 +18,5 @@ public interface EmployeeDao {
 
     int insertEmployee(Employee employee);
 
-    Employee updateEmployee(Employee employee);
+    int updateEmployee(Employee employee);
 }

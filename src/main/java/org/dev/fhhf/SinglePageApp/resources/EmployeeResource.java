@@ -37,13 +37,8 @@ public class EmployeeResource {
         return employeeService.findAllEmployeesPaginated(this.page,this.size);
     }
 
-    //@GetMapping("/search/{empName}/{page}/{size}")
     @GetMapping("/search/{empName}")
     public List<Employee> findEmployeesNameStarsWith(@PathVariable("empName") String empName){
-                                                     //@PathVariable("page") int page,
-                                                     //@PathVariable("size") int size
-        //this.page = page;
-        //this.size = size;
         return employeeService.findEmployeesNameStartsWith(empName, this.page, this.size);
     }
 
@@ -54,12 +49,12 @@ public class EmployeeResource {
 
     @PostMapping("/insert")
     public int addEmployee(@RequestBody Employee employee){
-        System.out.println(employee);
         return employeeService.insertEmployee(employee);
     }
 
     @PutMapping("/update/{empId}")
-    public Employee updateEmployee(@PathParam("empId") int empId, Employee employee){
-        return null;
+    public int updateEmployee(@PathVariable("empId") int empId, @RequestBody Employee employee){
+        employee.setEmpId(empId);
+        return employeeService.updateEmployee(employee);
     }
 }

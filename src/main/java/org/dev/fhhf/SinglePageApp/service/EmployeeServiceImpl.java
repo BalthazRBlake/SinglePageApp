@@ -3,6 +3,7 @@ package org.dev.fhhf.SinglePageApp.service;
 import org.dev.fhhf.SinglePageApp.dao.EmployeeDao;
 import org.dev.fhhf.SinglePageApp.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +53,21 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public int insertEmployee(Employee employee) {
+        try {
             return employeeDao.insertEmployee(employee);
+        }
+        catch (DataIntegrityViolationException ex){
+            return 0;
+        }
+    }
+
+    @Override
+    public int updateEmployee(Employee employee) {
+        try{
+            return employeeDao.updateEmployee(employee);
+        }
+        catch (DataIntegrityViolationException ex){
+            return 0;
+        }
     }
 }
