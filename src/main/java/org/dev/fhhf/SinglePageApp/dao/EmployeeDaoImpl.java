@@ -6,6 +6,9 @@ import org.dev.fhhf.SinglePageApp.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -17,6 +20,8 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     @Autowired
     private DepartmentService departmentService;
 
@@ -47,13 +52,15 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
     @Override
     public List<Employee> findEmployeesNameStartsWith(String empName, int page, int size) {
+
         String sql = "SELECT * FROM tbl_employees "
                    + "LEFT JOIN tbl_departments "
                    + "ON emp_dpid = dp_id "
-                   + "WHERE emp_name ILIKE '"+empName+"%'"
-                   + "OFFSET ? LIMIT ?";
-
-        return jdbcTemplate.query(sql, new Object[]{ (page-1)*size, size }, new EmployeeMapper());
+                   + "WHERE emp_name ILIKE :empName";
+                   //+ "OFFSET :page LIMIT :size";
+        SqlParameterSource params = new MapSqlParameterSource("empName", empName.concat("%"));
+        //.addValue("page", (page-1)*size).addValue("size", size);
+        return namedParameterJdbcTemplate.query(sql, params, new EmployeeMapper());
     }
 
     @Override
