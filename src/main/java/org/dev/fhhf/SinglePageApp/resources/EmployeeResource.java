@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/spapp")
+@RequestMapping("/spapp/emp")
 public class EmployeeResource {
 
     @Autowired

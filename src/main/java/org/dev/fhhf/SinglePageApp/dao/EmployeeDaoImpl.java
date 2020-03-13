@@ -2,7 +2,6 @@ package org.dev.fhhf.SinglePageApp.dao;
 
 import org.dev.fhhf.SinglePageApp.model.Department;
 import org.dev.fhhf.SinglePageApp.model.Employee;
-import org.dev.fhhf.SinglePageApp.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -19,8 +18,6 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-    @Autowired
-    private DepartmentService departmentService;
 
     @Override
     public int countTotalEmployees() {
