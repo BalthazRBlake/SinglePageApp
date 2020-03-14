@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan
-@PropertySource(value = { "classpath:application.properties" })
+@PropertySource(value = { "classpath:applicationPostgreSQL.properties" })
 public class DataSourceConfig {
 
     @Autowired
