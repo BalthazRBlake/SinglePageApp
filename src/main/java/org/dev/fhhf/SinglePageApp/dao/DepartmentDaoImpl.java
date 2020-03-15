@@ -3,7 +3,9 @@ package org.dev.fhhf.SinglePageApp.dao;
 import org.dev.fhhf.SinglePageApp.model.Department;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -29,6 +31,32 @@ public class DepartmentDaoImpl implements DepartmentDao {
                         .getJdbcTemplate()
                         .queryForObject(sql, new Object[]{dpId}, String.class);
         return dpName;
+    }
+
+    @Override
+    public int insertDepartment(Department department) {
+        String sql = "INSERT INTO tbl_departments (dp_id, dp_name) "
+                + "VALUES (DEFAULT, :dpName)";
+        SqlParameterSource namedParams = new MapSqlParameterSource("dpName", department.getDpName());
+        return namedParameterJdbcTemplate.update(sql, namedParams);
+    }
+
+    @Override
+    public int updateDepartment(Department department) {
+        String sql = "UPDATE tbl_departments "
+                + "SET dp_name = :dpName "
+                + "WHERE dp_id = :dpId";
+        SqlParameterSource namedParams = new MapSqlParameterSource("dpId", department.getDpId())
+                                                    .addValue("dpName", department.getDpName());
+        return namedParameterJdbcTemplate.update(sql, namedParams);
+    }
+
+    @Override
+    public int deleteDepartment(int dpId) {
+        String sql = "DELETE FROM tbl_departments "
+                + "WHERE dp_id = :dpId";
+        SqlParameterSource namedParams = new MapSqlParameterSource("dpId", dpId);
+        return namedParameterJdbcTemplate.update(sql, namedParams);
     }
 
     private static final class DepartmentMapper implements RowMapper<Department> {

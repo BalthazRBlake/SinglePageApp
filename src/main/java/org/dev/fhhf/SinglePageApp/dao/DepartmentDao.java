@@ -9,4 +9,10 @@ public interface DepartmentDao {
     List<Department> findAllDepartments();
 
     String findDepartmentNameById(int dpId);
+
+    int insertDepartment(Department department);
+
+    int updateDepartment(Department department);
+
+    int deleteDepartment(int dpId);
 }
