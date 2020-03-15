@@ -1,5 +1,6 @@
 package org.dev.fhhf.SinglePageApp.resources;
 
+import io.swagger.annotations.ApiOperation;
 import org.dev.fhhf.SinglePageApp.model.Employee;
 import org.dev.fhhf.SinglePageApp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,8 @@ public class EmployeeResource {
         return employeeService.findAllEmployeesPaginated(this.page,this.size);
     }
 
+    @ApiOperation(value = "Find all names beginning by given string",
+                    response = Employee.class)
     @GetMapping("/search/{empName}")
     public List<Employee> findEmployeesNameStarsWith(@PathVariable("empName") String empName){
         return employeeService.findEmployeesNameStartsWith(empName, this.page, this.size);

@@ -1,4 +1,5 @@
 org/dev/fhhf/SinglePageApp/service/DepartmentService.class
+org/dev/fhhf/SinglePageApp/config/SwaggerConfig.class
 org/dev/fhhf/SinglePageApp/SinglePageAppApplication.class
 org/dev/fhhf/SinglePageApp/dao/EmployeeDao.class
 org/dev/fhhf/SinglePageApp/dao/EmployeeDaoImpl.class
