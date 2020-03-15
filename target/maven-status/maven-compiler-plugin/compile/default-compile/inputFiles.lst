@@ -10,5 +10,6 @@
 /Users/fhhf/Desktop/Projects/Java/SinglePageApp/src/main/java/org/dev/fhhf/SinglePageApp/model/Department.java
 /Users/fhhf/Desktop/Projects/Java/SinglePageApp/src/main/java/org/dev/fhhf/SinglePageApp/dao/EmployeeDaoImpl.java
 /Users/fhhf/Desktop/Projects/Java/SinglePageApp/src/main/java/org/dev/fhhf/SinglePageApp/resources/EmployeeResource.java
+/Users/fhhf/Desktop/Projects/Java/SinglePageApp/src/main/java/org/dev/fhhf/SinglePageApp/config/SwaggerConfig.java
 /Users/fhhf/Desktop/Projects/Java/SinglePageApp/src/main/java/org/dev/fhhf/SinglePageApp/dao/EmployeeDao.java
 /Users/fhhf/Desktop/Projects/Java/SinglePageApp/src/main/java/org/dev/fhhf/SinglePageApp/dao/DepartmentDaoImpl.java
