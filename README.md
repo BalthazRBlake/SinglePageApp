@@ -2,11 +2,13 @@
 
 REST API build with Java 8, Mave, JDBC, Spring (boot, web, jdbc), Swagger, PostgreSQL and deployed to Heroku.
 
->[• REST API Swagger documentation](https://spa-java-api.herokuapp.com/swagger-ui.html)
+>• **REST API** - [Swagger documentation](https://spa-java-api.herokuapp.com/swagger-ui.html)
 
-The front end is built with Vue.JS
+The front end is built with Vue.js
 
->[• Vue JS frontend](https://github.com/BalthazRBlake/SinglePageAppFrontEnd)
+>• **Vue.js** - [frontend App](https://single-page-employees-app.herokuapp.com/)
+
+>• **Vue.js** - [frontend Repo](https://github.com/BalthazRBlake/SinglePageAppFrontEnd)
 
 ## App V 1.0
 ### Future App Features
