@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -71,13 +73,24 @@ public class EmployeeDaoImpl implements EmployeeDao{
     }
 
     @Override
-    public int insertEmployee(Employee employee) {
+    public Employee insertEmployee(Employee employee) {
         String sql = "INSERT INTO tbl_employees (emp_id, emp_name, emp_active, emp_dpid) "
                    + "VALUES (DEFAULT, :empName, :empActive, :emp_dpId)";
+
         SqlParameterSource namedParams = new MapSqlParameterSource("empName", employee.getEmpName())
                                                 .addValue("empActive", employee.getEmpActive())
                                                 .addValue("emp_dpId",employee.getEmp_dpId().getDpId());
-        return namedParameterJdbcTemplate.update(sql, namedParams);
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        int success = namedParameterJdbcTemplate.update(sql, namedParams, keyHolder);
+
+        if(success == 0){
+            return new Employee(0);
+        }
+
+        int empId = (int) keyHolder.getKeys().get("emp_id");
+        employee.setEmpId(empId);
+        return employee;
     }
 
     @Override

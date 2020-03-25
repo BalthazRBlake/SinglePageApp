@@ -45,20 +45,19 @@ public class EmployeeServiceImpl implements EmployeeService{
         try {
             return employeeDao.findEmployeeById(empId);
         }
-        catch (EmptyResultDataAccessException e){
-            //e.printStackTrace();
+        catch (EmptyResultDataAccessException ex){
             return new Employee();
         }
     }
 
     @Override
-    public int insertEmployee(Employee employee) {
-        try {
+    public Employee insertEmployee(Employee employee) {
+        //try {
             return employeeDao.insertEmployee(employee);
-        }
-        catch (DataIntegrityViolationException ex){
-            return 0;
-        }
+        //}
+        //catch (DataIntegrityViolationException ex){
+            //return new Employee(0);
+        //}
     }
 
     @Override
