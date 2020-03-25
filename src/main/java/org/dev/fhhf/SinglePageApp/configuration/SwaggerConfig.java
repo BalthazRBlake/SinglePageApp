@@ -1,4 +1,4 @@
-package org.dev.fhhf.SinglePageApp.config;
+package org.dev.fhhf.SinglePageApp.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

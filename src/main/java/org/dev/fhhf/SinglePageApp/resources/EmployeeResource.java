@@ -5,6 +5,7 @@ import org.dev.fhhf.SinglePageApp.model.Department;
 import org.dev.fhhf.SinglePageApp.model.Employee;
 import org.dev.fhhf.SinglePageApp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,9 +66,14 @@ public class EmployeeResource {
     }
 
     @PutMapping("/update/{empId}")
-    public int updateEmployee(@PathVariable("empId") int empId, @RequestBody Employee employee){
+    public ResponseEntity<Employee> updateEmployee(@PathVariable("empId") int empId, @RequestBody Employee employee){
         employee.setEmpId(empId);
-        return employeeService.updateEmployee(employee);
+        int result = employeeService.updateEmployee(employee);
+
+        if(result == 0)
+        throw new EmptyResultDataAccessException(1);
+
+        return ResponseEntity.ok(employeeService.findEmployeeById(empId));
     }
 
     @DeleteMapping("/delete/{empId}")

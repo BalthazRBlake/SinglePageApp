@@ -1,4 +1,4 @@
-package org.dev.fhhf.SinglePageApp.config;
+package org.dev.fhhf.SinglePageApp.configuration;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 public class DataSourceConfig {
 
     @Autowired
-    Environment env;
+    private Environment env;
 
     @Bean
     public DataSource dataSource() {
