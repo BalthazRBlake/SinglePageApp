@@ -21,6 +21,10 @@ public class Employee implements Serializable {
     public Employee() {
     }
 
+    public Employee(Integer empId) {
+        this.empId = empId;
+    }
+
     public Employee(Integer empId, String empName, Boolean empActive, Department emp_dpId) {
         this.empId = empId;
         this.empName = empName;

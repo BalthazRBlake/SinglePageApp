@@ -3,8 +3,6 @@ package org.dev.fhhf.SinglePageApp.service;
 import org.dev.fhhf.SinglePageApp.dao.EmployeeDao;
 import org.dev.fhhf.SinglePageApp.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,12 +15,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public int countTotalEmployees() {
-        try{
-            return employeeDao.countTotalEmployees();
-        } catch (EmptyResultDataAccessException e){
-            //e.printStackTrace();
-            return 0;
-        }
+        return employeeDao.countTotalEmployees();
     }
 
     @Override
@@ -42,42 +35,21 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Employee findEmployeeById(int empId){
-        try {
-            return employeeDao.findEmployeeById(empId);
-        }
-        catch (EmptyResultDataAccessException e){
-            //e.printStackTrace();
-            return new Employee();
-        }
+        return employeeDao.findEmployeeById(empId);
     }
 
     @Override
-    public int insertEmployee(Employee employee) {
-        try {
-            return employeeDao.insertEmployee(employee);
-        }
-        catch (DataIntegrityViolationException ex){
-            return 0;
-        }
+    public Employee insertEmployee(Employee employee) {
+        return employeeDao.insertEmployee(employee);
     }
 
     @Override
     public int updateEmployee(Employee employee) {
-        try{
-            return employeeDao.updateEmployee(employee);
-        }
-        catch (DataIntegrityViolationException ex){
-            return 0;
-        }
+        return employeeDao.updateEmployee(employee);
     }
 
     @Override
     public int deleteEmployee(int empId) {
-        try{
-            return employeeDao.deleteEmployee(empId);
-        }
-        catch (DataIntegrityViolationException ex){
-            return 0;
-        }
+        return employeeDao.deleteEmployee(empId);
     }
 }

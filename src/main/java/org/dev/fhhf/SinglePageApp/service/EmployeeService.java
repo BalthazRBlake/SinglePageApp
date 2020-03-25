@@ -17,7 +17,7 @@ public interface EmployeeService {
 
     Employee findEmployeeById(int empId);
 
-    int insertEmployee(Employee employee);
+    Employee insertEmployee(Employee employee);
 
     int updateEmployee(Employee employee);
 
