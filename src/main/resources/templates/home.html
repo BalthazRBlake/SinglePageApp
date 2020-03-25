@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}" />
+    <title>SPA   :::   FHHF</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">
+            <img src="../static/favicon.ico"
+                      th:src="@{/favicon.ico}"
+                      width="30" height="30" class="d-inline-block align-top" alt="">
+            Single Page App Info
+        </a>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="container">
+
+            <br><br><br>
+
+            <div class="card-deck">
+                <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-header"><h3>API</h3></div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="https://spa-java-api.herokuapp.com/swagger-ui.html">Swagger Documentation</a>
+                        </h5>
+                    </div>
+                </div>
+                <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-header"><h3>GitHub Repo</h3></div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="https://github.com/BalthazRBlake/SinglePageApp">SinglePageApp</a>
+                        </h5>
+                    </div>
+                </div>
+                <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-header"><h3>Front End App</h3></div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="https://single-page-employees-app.herokuapp.com/">Single Page Employees App</a>
+                        </h5>
+                    </div>
+                </div>
+                <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-header"><h3>GitHub Repo FrontEnd</h3></div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="https://github.com/BalthazRBlake/SinglePageAppFrontEnd">SinglePageAppFrontEnd</a>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
