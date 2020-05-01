@@ -3,9 +3,8 @@ package org.dev.fhhf.SinglePageApp.service;
 import org.dev.fhhf.SinglePageApp.dao.DepartmentDao;
 import org.dev.fhhf.SinglePageApp.model.Department;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,43 +21,21 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public String findDepartmentNameById(int dpId) {
-        try{
-            String dpName = departmentDao.findDepartmentNameById(dpId);
-            return dpName;
-        }
-        catch (EmptyResultDataAccessException e){
-            //e.printStackTrace();
-            return "";
-        }
+        return departmentDao.findDepartmentNameById(dpId);
     }
 
     @Override
     public int insertDepartment(Department department) {
-        try{
-            return departmentDao.insertDepartment(department);
-        }
-        catch (DataIntegrityViolationException ex){
-            return 0;
-        }
+        return departmentDao.insertDepartment(department);
     }
 
     @Override
     public int updateDepartment(Department department) {
-        try{
-            return departmentDao.updateDepartment(department);
-        }
-        catch (DataIntegrityViolationException ex){
-            return 0;
-        }
+        return departmentDao.updateDepartment(department);
     }
 
     @Override
     public int deleteDepartment(int dpId) {
-        try{
-            return departmentDao.deleteDepartment(dpId);
-        }
-        catch (DataIntegrityViolationException ex){
-            return 0;
-        }
+        return departmentDao.deleteDepartment(dpId);
     }
 }

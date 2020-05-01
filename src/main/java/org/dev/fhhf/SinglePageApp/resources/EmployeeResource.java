@@ -1,7 +1,6 @@
 package org.dev.fhhf.SinglePageApp.resources;
 
 import io.swagger.annotations.ApiOperation;
-import org.dev.fhhf.SinglePageApp.model.Department;
 import org.dev.fhhf.SinglePageApp.model.Employee;
 import org.dev.fhhf.SinglePageApp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +70,7 @@ public class EmployeeResource {
         int result = employeeService.updateEmployee(employee);
 
         if(result == 0)
-        throw new EmptyResultDataAccessException(1);
+            throw new EmptyResultDataAccessException(0);
 
         return ResponseEntity.ok(employeeService.findEmployeeById(empId));
     }
