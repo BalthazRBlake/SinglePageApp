@@ -1,91 +1,132 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}" />
-    <title>SPA   :::   FHHF</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SPA   :::   FHHF</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
 </head>
+
 <body>
 
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="/">
             <img src="../static/favicon.ico"
-                      th:src="@{/favicon.ico}"
-                      width="30" height="30" class="d-inline-block align-top" alt="">
+                 th:src="@{/favicon.ico}"
+                 width="30" height="30"
+                 class="d-inline-block align-top" alt=""
+            >
             Single Page App Info
         </a>
     </nav>
 
-    <div class="container-fluid">
-        <div class="container">
-
-            <br><br><br>
-            <div class="row justify-content-center">
-                <div class="col-8">
-                    <div class="card-deck">
-                        <div class="card text-white bg-dark">
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    API Swagger Documentation
-                                </h4>
-                                <p>Contains documentation to consume the endpoints.</p>
-                                <a href="https://spa-java-api.herokuapp.com/swagger-ui.html"
-                                   target="_blank"
-                                   class="btn btn-outline-info">
-                                    Visit
-                                </a>
-                            </div>
+    <div class="container">
+        <br><br>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card-deck">
+                    <div class="card text-white bg-dark">
+                        <div class="card-body">
+                            <h4 class="card-title">API Swagger Documentation</h4>
+                            <p>Contains documentation to consume the endpoints.</p>
                         </div>
-                        <div class="card text-white bg-dark">
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    BackEnd GitHub Repo
-                                </h4>
-                                <p>This repository contains the Java project.</p>
-                                <a href="https://github.com/BalthazRBlake/SinglePageApp"
-                                   target="_blank"
-                                   class="btn btn-outline-info">
-                                    Visit
-                                </a>
-                            </div>
+                        <div class="card-footer border-dark">
+                            <a href="https://spa-java-api.herokuapp.com/swagger-ui.html"
+                               target="_blank"
+                               class="btn btn-outline-info">
+                                <div class="icon-wrapper">
+                                    <svg class="icon" width="24" height="24">
+                                        <use xlink:href="/svg/feather-sprite.svg#server"/>
+                                    </svg>
+                                </div>
+                            </a>
                         </div>
                     </div>
-                </div>
-                <div class="w-100"><br/><br/></div>
-                <div class="col-8">
-                    <div class="card-deck">
-                        <div class="card text-white bg-dark">
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    FrontEnd App
-                                </h4>
-                                <p>Vue.js App consuming the endpoints.</p>
-                                <a href="https://single-page-employees-app.herokuapp.com/"
-                                   class="btn btn-outline-info">
-                                    Visit
-                                </a>
-                            </div>
+                    <div class="card text-white bg-dark">
+                        <div class="card-body">
+                            <h4 class="card-title">BackEnd GitHub Repo</h4>
+                            <p>This repository contains the Java project.</p>
                         </div>
-                        <div class="card text-white bg-dark">
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    FrontEnd GitHub Repo
-                                </h4>
-                                <p>This repository contains the Vue.js project.</p>
-                                <a href="https://github.com/BalthazRBlake/single-page-app-vue"
-                                   target="_blank"
-                                   class="btn btn-outline-info">
-                                    Visit
-                                </a>
-                            </div>
+                        <div class="card-footer border-dark">
+                            <a href="https://github.com/BalthazRBlake/SinglePageApp"
+                               target="_blank"
+                               class="btn btn-outline-info">
+                                <div class="icon-wrapper">
+                                    <svg class="icon" width="24" height="24">
+                                        <use xlink:href="/svg/feather-sprite.svg#github"/>
+                                    </svg>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="w-100"><br/></div>
+            <div class="col-md-8">
+                <div class="card-deck">
+                    <div class="card text-white bg-dark">
+                        <div class="card-body">
+                            <h4 class="card-title">FrontEnd App</h4>
+                            <p>Vue.js App consuming the endpoints.</p>
+                        </div>
+                        <div class="card-footer border-dark">
+                            <a href="https://single-page-employees-app.herokuapp.com/"
+                               class="btn btn-outline-info">
+                                <div class="icon-wrapper">
+                                    <svg class="icon" width="24" height="24">
+                                        <use xlink:href="/svg/feather-sprite.svg#aperture"/>
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card text-white bg-dark">
+                        <div class="card-body">
+                            <h4 class="card-title">FrontEnd GitHub Repo</h4>
+                            <p>This repository contains the Vue.js project.</p>
+                        </div>
+                        <div class="card-footer border-dark">
+                            <a href="https://github.com/BalthazRBlake/single-page-app-vue"
+                               target="_blank"
+                               class="btn btn-outline-info">
+                                <div class="icon-wrapper">
+                                    <svg class="icon" width="24" height="24">
+                                        <use xlink:href="/svg/feather-sprite.svg#github"/>
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="w-100"><br/></div>
+            <div class="col-md-4">
+                <div class="card-deck">
+                    <div class="card text-white bg-dark">
+                        <div class="card-body">
+                            <h4 class="card-title">LinkedIn</h4>
+                            <p>Visit my LinkedIn profile.</p>
+                        </div>
+                        <div class="card-footer border-dark">
+                            <a href="https://www.linkedin.com/in/fabian-humberto-hernandez-forero/"
+                               class="btn btn-outline-info">
+                                <div class="icon-wrapper">
+                                    <svg class="icon" width="24" height="24">
+                                        <use xlink:href="/svg/feather-sprite.svg#linkedin"/>
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </div>
 
-    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>
