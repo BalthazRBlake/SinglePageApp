@@ -1,15 +1,15 @@
-package org.dev.fhhf.SinglePageApp.exception;
+package org.dev.fhhf.SinglePageApp.model;
 
-public class Error {
+public class AppError {
 
     private String errorMsg;
     private Integer errorCode;
     private String supportContact;
 
-    public Error() {
+    public AppError() {
     }
 
-    public Error(String errorMsg, Integer errorCode, String supportContact) {
+    public AppError(String errorMsg, Integer errorCode, String supportContact) {
         this.errorMsg = errorMsg;
         this.errorCode = errorCode;
         this.supportContact = supportContact;

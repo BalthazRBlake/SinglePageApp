@@ -1,5 +1,6 @@
 package org.dev.fhhf.SinglePageApp.exception;
 
+import org.dev.fhhf.SinglePageApp.model.AppError;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
@@ -22,7 +23,7 @@ public class ResponseEntityControllerExceptionHandler
                 "Employee with given id not found" :
                 "Department with given id not found";
 
-        Error responseBody = new Error(errorMsg,404, "https://github.com/BalthazRBlake");
+        AppError responseBody = new AppError(errorMsg,404, "https://github.com/BalthazRBlake");
         return handleExceptionInternal(ex, responseBody,
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
