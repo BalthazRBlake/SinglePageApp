@@ -12,7 +12,7 @@ public interface EmployeeDao {
 
     List<Employee> findAllEmployeesPaginated(int page, int size);
 
-    List<Employee> findEmployeesNameStartsWith(String empName, int page, int size);
+    List<Employee> findEmployeesNameStartsWith(String empName);
 
     Employee findEmployeeById(int empId);
 

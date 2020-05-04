@@ -18,8 +18,6 @@ public class EmployeeRestController {
     @Autowired
     private EmployeeService employeeService;
 
-    private int page = 1, size = 5;
-
     @GetMapping("/pages")
     public ResponseEntity<Integer> countTotalEmployees(){
         Integer count = employeeService.countTotalEmployees();
@@ -36,10 +34,7 @@ public class EmployeeRestController {
     @GetMapping("/paginated/{page}/{size}")
     public ResponseEntity<List<Employee>> findAllEmployeesPaginated(@PathVariable("page") int page,
                                                     @PathVariable("size") int size){
-        this.page = page;
-        this.size = size;
-
-        List<Employee> employees = employeeService.findAllEmployeesPaginated(this.page,this.size);
+        List<Employee> employees = employeeService.findAllEmployeesPaginated(page, size);
         return !employees.isEmpty() ? ResponseEntity.ok(employees) :
                 ResponseEntity.notFound().build();
     }
@@ -48,7 +43,7 @@ public class EmployeeRestController {
                     response = Employee.class)
     @GetMapping("/search/{empName}")
     public ResponseEntity<List<Employee>> findEmployeesNameStarsWith(@PathVariable("empName") String empName){
-        List<Employee> employees = employeeService.findEmployeesNameStartsWith(empName, this.page, this.size);
+        List<Employee> employees = employeeService.findEmployeesNameStartsWith(empName);
         return ResponseEntity.ok(employees);
     }
 

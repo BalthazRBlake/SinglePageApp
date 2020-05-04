@@ -49,16 +49,13 @@ public class EmployeeDaoImpl implements EmployeeDao{
     }
 
     @Override
-    public List<Employee> findEmployeesNameStartsWith(String empName, int page, int size) {
-
+    public List<Employee> findEmployeesNameStartsWith(String empName) {
         String sql = "SELECT * FROM tbl_employees "
                    + "LEFT JOIN tbl_departments "
                    + "ON emp_dpid = dp_id "
                    + "WHERE emp_name ILIKE :empName "
                    + "ORDER BY emp_id ";
-                   //+ "OFFSET :page LIMIT :size";
         SqlParameterSource params = new MapSqlParameterSource("empName", empName.concat("%"));
-        //.addValue("page", (page-1)*size).addValue("size", size);
         return namedParameterJdbcTemplate.query(sql, params, new EmployeeMapper());
     }
 
