@@ -1,4 +1,4 @@
-package org.dev.fhhf.SinglePageApp.resources;
+package org.dev.fhhf.SinglePageApp.controller;
 
 import org.dev.fhhf.SinglePageApp.model.Department;
 import org.dev.fhhf.SinglePageApp.service.DepartmentService;
@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/spapp/dep")
-public class DepartmentResource {
+public class DepartmentRestController {
 
     @Autowired
     private DepartmentService departmentService;

@@ -1,4 +1,4 @@
-package org.dev.fhhf.SinglePageApp.resources;
+package org.dev.fhhf.SinglePageApp.controller;
 
 import io.swagger.annotations.ApiOperation;
 import org.dev.fhhf.SinglePageApp.model.Employee;
@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/spapp/emp")
-public class EmployeeResource {
+public class EmployeeRestController {
 
     @Autowired
     private EmployeeService employeeService;
