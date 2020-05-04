@@ -25,8 +25,8 @@ public class DepartmentRestController {
     }
 
     @PostMapping("/insert")
-    public int addDepartment(@RequestBody Department department){
-        return departmentService.insertDepartment(department);
+    public ResponseEntity<Department> addDepartment(@RequestBody Department department){
+        return ResponseEntity.ok(departmentService.insertDepartment(department));
     }
 
     @PutMapping("/update/{dpId}")
