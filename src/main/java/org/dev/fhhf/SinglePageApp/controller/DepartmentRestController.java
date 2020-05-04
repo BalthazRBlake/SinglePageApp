@@ -2,8 +2,8 @@ package org.dev.fhhf.SinglePageApp.controller;
 
 import org.dev.fhhf.SinglePageApp.model.Department;
 import org.dev.fhhf.SinglePageApp.service.DepartmentService;
+import org.dev.fhhf.SinglePageApp.service.ValidateInputDataService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +16,8 @@ public class DepartmentRestController {
 
     @Autowired
     private DepartmentService departmentService;
+    @Autowired
+    private ValidateInputDataService validateInputDataService;
 
     @GetMapping("/all")
     public List<Department> getAllDepartments(){
@@ -29,12 +31,10 @@ public class DepartmentRestController {
 
     @PutMapping("/update/{dpId}")
     public ResponseEntity<Department> updateDepartment(@PathVariable("dpId") int dpId, @RequestBody Department department){
+        validateInputDataService.validateDepartment(dpId);
+
         department.setDpId(dpId);
-        int result = departmentService.updateDepartment(department);
-
-        if(result == 0)
-            throw new DataIntegrityViolationException("");
-
+        departmentService.updateDepartment(department);
         return ResponseEntity.ok(department);
     }
 

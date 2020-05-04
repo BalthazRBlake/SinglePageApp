@@ -8,7 +8,7 @@ public interface DepartmentDao {
 
     List<Department> findAllDepartments();
 
-    String findDepartmentNameById(int dpId);
+    Department findDepartmentById(int dpId);
 
     int insertDepartment(Department department);
 

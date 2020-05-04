@@ -25,12 +25,11 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
     @Override
-    public String findDepartmentNameById(int dpId) {
-        String sql = "SELECT dp_name FROM tbl_departments WHERE dp_id = ?";
-        String dpName = namedParameterJdbcTemplate
-                        .getJdbcTemplate()
-                        .queryForObject(sql, new Object[]{dpId}, String.class);
-        return dpName;
+    public Department findDepartmentById(int dpId) {
+        String sql = "SELECT * FROM tbl_departments "
+                + " WHERE dp_id = :dpId";
+        SqlParameterSource namedParams = new MapSqlParameterSource("dpId", dpId);
+        return namedParameterJdbcTemplate.queryForObject(sql, namedParams, new DepartmentMapper());
     }
 
     @Override
