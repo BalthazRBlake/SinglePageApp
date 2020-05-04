@@ -37,14 +37,14 @@ public class EmployeeDaoImpl implements EmployeeDao{
     }
 
     @Override
-    public List<Employee> findAllEmployeesPaginated(int page, int size) {
+    public List<Employee> findPaginatedEmployees(int currentPage, int perPage) {
         String sql = "SELECT * FROM tbl_employees "
                    + "LEFT JOIN tbl_departments "
                    + "ON emp_dpid = dp_id "
                    + "ORDER BY emp_id "
-                   + "OFFSET :page LIMIT :size";
-        SqlParameterSource namedParams = new MapSqlParameterSource("page", (page-1)*size)
-                                                        .addValue("size", size);
+                   + "OFFSET :currentPage LIMIT :perPage";
+        SqlParameterSource namedParams = new MapSqlParameterSource("currentPage", (currentPage - 1) * perPage)
+                                                        .addValue("perPage", perPage);
         return namedParameterJdbcTemplate.query(sql, namedParams, new EmployeeMapper());
     }
 
@@ -79,11 +79,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
                                                 .addValue("emp_dpId",employee.getEmp_dpId().getDpId());
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        int success = namedParameterJdbcTemplate.update(sql, namedParams, keyHolder);
-
-        if(success == 0){
-            return new Employee(0);
-        }
+        namedParameterJdbcTemplate.update(sql, namedParams, keyHolder);
 
         int empId = (int) keyHolder.getKeys().get("emp_id");
         employee.setEmpId(empId);

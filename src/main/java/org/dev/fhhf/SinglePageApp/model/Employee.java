@@ -68,7 +68,7 @@ public class Employee implements Serializable {
     public String toString() {
         return "Employee{" +
                 "empId=" + empId +
-                ", empName='" + empName + '\'' +
+                ", empName='" + empName +
                 ", empActive=" + empActive +
                 ", emp_dpId=" + emp_dpId +
                 '}';

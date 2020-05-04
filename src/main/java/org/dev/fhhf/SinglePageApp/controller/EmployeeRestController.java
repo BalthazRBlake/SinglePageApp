@@ -20,7 +20,7 @@ public class EmployeeRestController {
     @Autowired
     private ValidateInputDataService validateInputDataService;
 
-    @GetMapping("/pages")
+    @GetMapping("/totalEmployees")
     public ResponseEntity<Integer> countTotalEmployees(){
         Integer count = employeeService.countTotalEmployees();
         return ResponseEntity.ok(count);
@@ -32,12 +32,11 @@ public class EmployeeRestController {
         return !employees.isEmpty() ? ResponseEntity.ok(employees) : ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/paginated/{page}/{size}")
-    public ResponseEntity<List<Employee>> findAllEmployeesPaginated(
-            @PathVariable("page") int page, @PathVariable("size") int size){
-        List<Employee> employees = employeeService.findAllEmployeesPaginated(page, size);
-        return !employees.isEmpty() ? ResponseEntity.ok(employees) :
-                ResponseEntity.notFound().build();
+    @GetMapping("/paginated/{currentPage}/{perPage}")
+    public ResponseEntity<List<Employee>> findPaginatedEmployees(
+            @PathVariable("currentPage") int currentPage, @PathVariable("perPage") int perPage){
+        List<Employee> employees = employeeService.findAllEmployeesPaginated(currentPage, perPage);
+        return !employees.isEmpty() ? ResponseEntity.ok(employees) : ResponseEntity.notFound().build();
     }
 
     @ApiOperation(value = "Find all names beginning with given string", response = Employee.class)
@@ -55,6 +54,7 @@ public class EmployeeRestController {
 
     @PostMapping("/insert")
     public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
+        validateInputDataService.validateDepartment(employee.getEmp_dpId().getDpId());
         employeeService.insertEmployee(employee);
         return ResponseEntity.ok(employee);
     }
