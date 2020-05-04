@@ -1,5 +1,6 @@
 package org.dev.fhhf.SinglePageApp.exception;
 
+import org.dev.fhhf.SinglePageApp.model.AppError;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
@@ -14,15 +15,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ResponseEntityControllerExceptionHandler
             extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = {DataIntegrityViolationException.class, EmptyResultDataAccessException.class})
-    protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request){
+    @ExceptionHandler(value = {
+            DataNotFoundException.class,
+            DataIntegrityViolationException.class,
+            EmptyResultDataAccessException.class
+    }) protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request){
 
-        String errorMsg =
-                ex.getClass().getSimpleName().equals("EmptyResultDataAccessException") ?
-                "Employee with given id not found" :
-                "Department with given id not found";
-
-        Error responseBody = new Error(errorMsg,404, "https://github.com/BalthazRBlake");
+        String errorMsg = ex.getMessage();
+        AppError responseBody = new AppError(errorMsg,404, "https://github.com/BalthazRBlake");
         return handleExceptionInternal(ex, responseBody,
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }

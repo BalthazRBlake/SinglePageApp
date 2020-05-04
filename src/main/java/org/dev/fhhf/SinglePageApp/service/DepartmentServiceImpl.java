@@ -4,7 +4,6 @@ import org.dev.fhhf.SinglePageApp.dao.DepartmentDao;
 import org.dev.fhhf.SinglePageApp.model.Department;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,12 +19,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public String findDepartmentNameById(int dpId) {
-        return departmentDao.findDepartmentNameById(dpId);
+    public Department findDepartmentById(int dpId) {
+        return departmentDao.findDepartmentById(dpId);
     }
 
     @Override
-    public int insertDepartment(Department department) {
+    public Department insertDepartment(Department department) {
         return departmentDao.insertDepartment(department);
     }
 

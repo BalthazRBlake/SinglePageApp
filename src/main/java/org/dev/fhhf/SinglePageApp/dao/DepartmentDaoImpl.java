@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -25,20 +27,25 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
     @Override
-    public String findDepartmentNameById(int dpId) {
-        String sql = "SELECT dp_name FROM tbl_departments WHERE dp_id = ?";
-        String dpName = namedParameterJdbcTemplate
-                        .getJdbcTemplate()
-                        .queryForObject(sql, new Object[]{dpId}, String.class);
-        return dpName;
+    public Department findDepartmentById(int dpId) {
+        String sql = "SELECT * FROM tbl_departments "
+                + " WHERE dp_id = :dpId";
+        SqlParameterSource namedParams = new MapSqlParameterSource("dpId", dpId);
+        return namedParameterJdbcTemplate.queryForObject(sql, namedParams, new DepartmentMapper());
     }
 
     @Override
-    public int insertDepartment(Department department) {
+    public Department insertDepartment(Department department) {
         String sql = "INSERT INTO tbl_departments (dp_id, dp_name) "
                 + "VALUES (DEFAULT, :dpName)";
         SqlParameterSource namedParams = new MapSqlParameterSource("dpName", department.getDpName());
-        return namedParameterJdbcTemplate.update(sql, namedParams);
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        namedParameterJdbcTemplate.update(sql, namedParams, keyHolder);
+
+        int dpId = (int) keyHolder.getKeys().get("dp_id");
+        department.setDpId(dpId);
+        return department;
     }
 
     @Override

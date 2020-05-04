@@ -10,9 +10,9 @@ public interface EmployeeDao {
 
     List<Employee> findAllEmployees();
 
-    List<Employee> findAllEmployeesPaginated(int page, int size);
+    List<Employee> findPaginatedEmployees(int currentPage, int perPage);
 
-    List<Employee> findEmployeesNameStartsWith(String empName, int page, int size);
+    List<Employee> findEmployeesNameStartsWith(String empName);
 
     Employee findEmployeeById(int empId);
 

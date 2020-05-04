@@ -8,9 +8,9 @@ public interface DepartmentService {
 
     List<Department> findAllDepartments();
 
-    String findDepartmentNameById(int dpId);
+    Department findDepartmentById(int dpId);
 
-    int insertDepartment(Department department);
+    Department insertDepartment(Department department);
 
     int updateDepartment(Department department);
 

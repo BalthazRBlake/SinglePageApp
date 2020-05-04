@@ -24,13 +24,13 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public List<Employee> findAllEmployeesPaginated(int page, int size) {
-        return employeeDao.findAllEmployeesPaginated(page, size);
+    public List<Employee> findAllEmployeesPaginated(int currentPage, int perPage) {
+        return employeeDao.findPaginatedEmployees(currentPage, perPage);
     }
 
     @Override
-    public List<Employee> findEmployeesNameStartsWith(String empName, int page, int size) {
-        return employeeDao.findEmployeesNameStartsWith(empName, page, size);
+    public List<Employee> findEmployeesNameStartsWith(String empName) {
+        return employeeDao.findEmployeesNameStartsWith(empName);
     }
 
     @Override

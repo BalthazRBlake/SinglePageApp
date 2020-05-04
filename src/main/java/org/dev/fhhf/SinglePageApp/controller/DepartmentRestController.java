@@ -1,9 +1,9 @@
-package org.dev.fhhf.SinglePageApp.resources;
+package org.dev.fhhf.SinglePageApp.controller;
 
 import org.dev.fhhf.SinglePageApp.model.Department;
 import org.dev.fhhf.SinglePageApp.service.DepartmentService;
+import org.dev.fhhf.SinglePageApp.service.ValidateInputDataService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +12,12 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/spapp/dep")
-public class DepartmentResource {
+public class DepartmentRestController {
 
     @Autowired
     private DepartmentService departmentService;
+    @Autowired
+    private ValidateInputDataService validateInputDataService;
 
     @GetMapping("/all")
     public List<Department> getAllDepartments(){
@@ -23,18 +25,16 @@ public class DepartmentResource {
     }
 
     @PostMapping("/insert")
-    public int addDepartment(@RequestBody Department department){
-        return departmentService.insertDepartment(department);
+    public ResponseEntity<Department> addDepartment(@RequestBody Department department){
+        return ResponseEntity.ok(departmentService.insertDepartment(department));
     }
 
     @PutMapping("/update/{dpId}")
     public ResponseEntity<Department> updateDepartment(@PathVariable("dpId") int dpId, @RequestBody Department department){
+        validateInputDataService.validateDepartment(dpId);
+
         department.setDpId(dpId);
-        int result = departmentService.updateDepartment(department);
-
-        if(result == 0)
-            throw new DataIntegrityViolationException("");
-
+        departmentService.updateDepartment(department);
         return ResponseEntity.ok(department);
     }
 
