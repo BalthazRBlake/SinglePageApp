@@ -1,0 +1,65 @@
+[
+  {
+    "empId": 1,
+    "empName": "Scarlet",
+    "empActive": true,
+    "emp_dpId": {
+      "dpId": 2,
+      "dpName": "Research & Development"
+    }
+  },
+  {
+    "empId": 2,
+    "empName": "Pett",
+    "empActive": true,
+    "emp_dpId": {
+      "dpId": 1,
+      "dpName": "Tech"
+    }
+  },
+  {
+    "empId": 3,
+    "empName": "Billy",
+    "empActive": false,
+    "emp_dpId": {
+      "dpId": 3,
+      "dpName": "HR"
+    }
+  },
+  {
+    "empId": 4,
+    "empName": "Memamu",
+    "empActive": true,
+    "emp_dpId": {
+      "dpId": 4,
+      "dpName": "Marketing"
+    }
+  },
+  {
+    "empId": 5,
+    "empName": "Luccy",
+    "empActive": false,
+    "emp_dpId": {
+      "dpId": 6,
+      "dpName": "Finance"
+    }
+  },
+  {
+    "empId": 6,
+    "empName": "Anna",
+    "empActive": true,
+    "emp_dpId": {
+      "dpId": 6,
+      "dpName": "Finance"
+    }
+  },
+  {
+    "empId": 7,
+    "empName": "Mariana",
+    "empActive": true,
+    "emp_dpId": {
+      "dpId": 1,
+      "dpName": "Tech"
+    }
+  }
+]
