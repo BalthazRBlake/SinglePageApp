@@ -12,8 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ReadAndParseJsonFile {
 
@@ -22,7 +22,7 @@ public class ReadAndParseJsonFile {
         JSONArray employeeList = null;
         JSONParser jsonParser = new JSONParser();
 
-        File file = this.getFileFromResources(fileName);
+        File file = getFileFromResources(fileName);
 
         try (FileReader reader = new FileReader(file))
         {
@@ -42,12 +42,13 @@ public class ReadAndParseJsonFile {
 
     public List<Employee> getParseEmployees(String fileName){
 
-        List<Employee> employees = new ArrayList<>();
+        List<Employee> employees;
 
-        JSONArray employeeList = this.getJsonArray(fileName);
-        employeeList.forEach( emp -> {
-            employees.add(parseEmployeeObject( (JSONObject) emp ));
-        });
+        JSONArray employeeList = getJsonArray(fileName);
+        employees = (List<Employee>) employeeList
+                .stream()
+                .map(emp -> parseEmployeeObject((JSONObject) emp))
+                .collect(Collectors.toList());
 
         return employees;
     }
@@ -77,8 +78,7 @@ public class ReadAndParseJsonFile {
         String dpName = (String) departmentObject.get("dpName");
 
         Department d = new Department((int) dpId, dpName);
-        Employee e = new Employee((int) empId, empName, empActive,d);
 
-        return e;
+        return new Employee((int) empId, empName, empActive, d);
     }
 }
