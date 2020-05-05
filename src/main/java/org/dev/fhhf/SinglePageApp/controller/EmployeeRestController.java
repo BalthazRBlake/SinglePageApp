@@ -35,7 +35,7 @@ public class EmployeeRestController {
     @GetMapping("/paginated/{currentPage}/{perPage}")
     public ResponseEntity<List<Employee>> findPaginatedEmployees(
             @PathVariable("currentPage") int currentPage, @PathVariable("perPage") int perPage){
-        List<Employee> employees = employeeService.findAllEmployeesPaginated(currentPage, perPage);
+        List<Employee> employees = employeeService.findPaginatedEmployees(currentPage, perPage);
         return !employees.isEmpty() ? ResponseEntity.ok(employees) : ResponseEntity.notFound().build();
     }
 

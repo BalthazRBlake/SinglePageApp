@@ -24,7 +24,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public List<Employee> findAllEmployeesPaginated(int currentPage, int perPage) {
+    public List<Employee> findPaginatedEmployees(int currentPage, int perPage) {
         return employeeDao.findPaginatedEmployees(currentPage, perPage);
     }
 
