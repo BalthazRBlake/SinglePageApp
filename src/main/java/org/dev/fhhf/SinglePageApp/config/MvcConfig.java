@@ -1,4 +1,4 @@
-package org.dev.fhhf.SinglePageApp.configuration;
+package org.dev.fhhf.SinglePageApp.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
