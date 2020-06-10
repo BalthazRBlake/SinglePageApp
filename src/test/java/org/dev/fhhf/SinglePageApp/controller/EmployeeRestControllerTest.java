@@ -44,7 +44,7 @@ class EmployeeRestControllerTest {
     }
 
     @Test
-    public void countTotalEmployeesTest() throws Exception {
+    void testCountTotalEmployees() throws Exception {
 
         when(employeeService.countTotalEmployees()).thenReturn(50);
 
@@ -57,7 +57,7 @@ class EmployeeRestControllerTest {
     }
 
     @Test
-    public void findAllEmployeesTest() throws Exception {
+    void testFindAllEmployees() throws Exception {
 
         String fileName = "json/EmployeeTestData.json";
 
@@ -76,7 +76,7 @@ class EmployeeRestControllerTest {
     }
 
     @Test
-    public void findPaginatedEmployeesTest() throws Exception {
+    void testFindPaginatedEmployees() throws Exception {
 
         String fileName = "json/EmployeeTestData.json";
 
@@ -97,7 +97,7 @@ class EmployeeRestControllerTest {
     }
 
     @Test
-    public void findEmployeesNameStarsWithTest() throws Exception {
+    void testFindEmployeesNameStarsWith() throws Exception {
 
         Department dep = new Department(1, "HR");
         Employee employee1 = new Employee(1, "Mark", false, dep);

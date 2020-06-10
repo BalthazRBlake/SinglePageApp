@@ -1,4 +1,4 @@
-package org.dev.fhhf.SinglePageApp.configuration;
+package org.dev.fhhf.SinglePageApp.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
